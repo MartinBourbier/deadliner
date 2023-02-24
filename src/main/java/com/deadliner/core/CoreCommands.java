@@ -1,33 +1,13 @@
-package com.deadliner;
+package com.deadliner.core;
 
 import com.deadliner.utils.CustomTextInput;
-import lombok.val;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 
-public class Bot extends ListenerAdapter {
-    public static void main(String[] args) {
-        String token = System.getenv("DISCORD_BOT_TOKEN");
-        if (token == null) {
-            System.err.println("ERROR: bot token could not be retrieved through env. Did you set it " +
-                    "properly?");
-            System.exit(1);
-        }
-        val jda = JDABuilder.createLight(token).addEventListeners(new Bot()).setActivity(Activity.playing(
-                "Deadline :panic:")).build();
-        jda.updateCommands().addCommands(
-                Commands.slash("register", "Registers a new deadline"),
-                Commands.slash("remove", "Removes a deadline"),
-                Commands.slash("edit", "Edit an already registered deadline")
-        ).queue();
-    }
-
+public class CoreCommands extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         if (event.getName().equals("register")) {
@@ -52,4 +32,5 @@ public class Bot extends ListenerAdapter {
             event.reply("Yolo edited!").queue();
         }
     }
+
 }
