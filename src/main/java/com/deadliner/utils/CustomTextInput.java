@@ -9,6 +9,7 @@ public class CustomTextInput {
                 .setMaxLength(maxLength)
                 .setRequired(required)
                 .setPlaceholder(placeHolder)
+                .setValue(null)
                 .build();
     }
 }
