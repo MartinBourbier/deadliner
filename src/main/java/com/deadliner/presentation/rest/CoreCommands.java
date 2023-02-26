@@ -1,6 +1,7 @@
-package com.deadliner.core;
+package com.deadliner.presentation.rest;
 
 import com.deadliner.utils.CustomTextInput;
+import com.deadliner.utils.ModalCreator;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.text.TextInput;
@@ -19,12 +20,7 @@ public class CoreCommands extends ListenerAdapter {
                     64, true, "Time of the deadline with format 'hh:mm'.");
             TextInput link = CustomTextInput.of("deadline-link", "Deadline link", TextInputStyle.SHORT,
                     1024, false, "Link to the associated task.");
-            Modal modal = Modal.create("deadline-modal", "Deadline info")
-                    .addActionRow(name)
-                    .addActionRow(date)
-                    .addActionRow(time)
-                    .addActionRow(link)
-                    .build();
+            Modal modal = ModalCreator.of("deadline-modal", "Deadline info", name, date, time, link);
             event.replyModal(modal).queue();
         } else if (event.getName().equals("remove")) {
             event.reply("Yolo removed!").queue();
@@ -32,5 +28,4 @@ public class CoreCommands extends ListenerAdapter {
             event.reply("Yolo edited!").queue();
         }
     }
-
 }
