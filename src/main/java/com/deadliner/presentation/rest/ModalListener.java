@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.modals.ModalMapping;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Objects;
 
 public class ModalListener extends ListenerAdapter {
