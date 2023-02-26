@@ -1,5 +1,6 @@
 package com.deadliner;
 
+import com.deadliner.presentation.rest.ButtonListener;
 import com.deadliner.presentation.rest.CoreCommands;
 import com.deadliner.presentation.rest.ModalListener;
 import lombok.val;
@@ -15,8 +16,8 @@ public class Main {
                     "properly?");
             System.exit(1);
         }
-        val jda = JDABuilder.createLight(token).addEventListeners(new CoreCommands(), new ModalListener())
-                .setActivity(Activity.playing("Deadline :panic:")).build();
+        val jda = JDABuilder.createLight(token).addEventListeners(new CoreCommands(), new ModalListener(),
+                new ButtonListener()).setActivity(Activity.playing("Deadline :panic:")).build();
         jda.updateCommands().addCommands(
                 Commands.slash("register", "Registers a new deadline"),
                 Commands.slash("remove", "Removes a deadline"),
