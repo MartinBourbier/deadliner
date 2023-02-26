@@ -26,6 +26,8 @@ public class CoreCommands extends ListenerAdapter {
             event.reply("Yolo removed!").queue();
         } else if (event.getName().equals("edit")) {
             event.reply("Yolo edited!").queue();
+        } else if (event.getName().equals("list")) {
+            event.reply("Yolo list!").queue();
         }
     }
 }

@@ -21,7 +21,8 @@ public class Main {
         jda.updateCommands().addCommands(
                 Commands.slash("register", "Registers a new deadline"),
                 Commands.slash("remove", "Removes a deadline"),
-                Commands.slash("edit", "Edit an already registered deadline")
+                Commands.slash("edit", "Edit an already registered deadline"),
+                Commands.slash("list", "Lists all the deadlines")
         ).queue();
     }
 }
