@@ -1,6 +1,7 @@
 package com.deadliner.domain.service;
 
-import com.deadliner.converter.DeadlineConverter;
+import com.deadliner.converter.DeadlineEntityToDeadlineModelConverter;
+import com.deadliner.converter.DeadlineModelToDeadlineEntityConverter;
 import com.deadliner.data.repository.DeadlineRepository;
 import com.deadliner.domain.entity.DeadlineEntity;
 
@@ -15,11 +16,20 @@ public class DeadlineService {
     @Inject
     DeadlineRepository deadlineRepository;
 
-    @Inject
-    DeadlineConverter deadlineConverter;
+    @Inject DeadlineModelToDeadlineEntityConverter deadlineModelToDeadlineEntityConverter;
+    @Inject DeadlineEntityToDeadlineModelConverter deadlineEntityToDeadlineModelConverter;
 
     @Transactional
     public List<DeadlineEntity> getAll() {
-        return deadlineRepository.findAll().stream().map(model -> deadlineConverter.toEntity(model)).collect(Collectors.toList());
+        return deadlineRepository.findAll()
+                                 .stream()
+                                 .map(model -> deadlineModelToDeadlineEntityConverter.toEntity(model))
+                                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void register(DeadlineEntity deadlineEntity) {
+        var model = deadlineEntityToDeadlineModelConverter.toModel(deadlineEntity);
+        deadlineRepository.persist(model);
     }
 }
