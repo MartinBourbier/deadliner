@@ -4,6 +4,7 @@ import com.deadliner.converter.DeadlineEntityToDeadlineModelConverter;
 import com.deadliner.converter.DeadlineModelToDeadlineEntityConverter;
 import com.deadliner.data.repository.DeadlineRepository;
 import com.deadliner.domain.entity.DeadlineEntity;
+import com.deadliner.utils.DeadlineStatus;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -31,5 +32,11 @@ public class DeadlineService {
     public void register(DeadlineEntity deadlineEntity) {
         var model = deadlineEntityToDeadlineModelConverter.toModel(deadlineEntity);
         deadlineRepository.persist(model);
+    }
+
+    @Transactional
+    public void publish(DeadlineEntity deadlineEntity) {
+        var deadline = deadlineRepository.find("label = ?1", deadlineEntity.label).firstResult();
+        deadline.status = DeadlineStatus.PUBLIC;
     }
 }

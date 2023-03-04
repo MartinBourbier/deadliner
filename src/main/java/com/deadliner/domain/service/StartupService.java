@@ -27,7 +27,7 @@ public class StartupService {
         val jda = JDABuilder.createLight(botToken);
         jda.addEventListeners(new CoreListener(deadlineService),
                               new ModalListener(deadlineService),
-                              new ButtonListener());
+                              new ButtonListener(deadlineService));
         jda.setActivity(Activity.playing("Deadline :panic:"));
         DiscordService.setInstance(jda.build());
     }
