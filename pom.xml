@@ -72,6 +72,11 @@
             <artifactId>quarkus-jdbc-postgresql</artifactId>
             <version>${versions.quarkus}</version>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-scheduler</artifactId>
+            <version>${versions.quarkus}</version>
+        </dependency>
     </dependencies>
 
     <build>
