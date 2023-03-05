@@ -1,6 +1,7 @@
 package com.deadliner.domain.entity;
 
-import com.deadliner.utils.DeadlineStatus;
+import com.deadliner.utils.NotifiedStatus;
+import com.deadliner.utils.PublishStatus;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -14,5 +15,7 @@ public class DeadlineEntity {
     public String label;
     public LocalDateTime deadlineDateTime;
     public String link;
-    public DeadlineStatus status;
+    public PublishStatus publishStatus;
+    public NotifiedStatus notifiedStatus;
+    public DiscordChannelEntity discordChannelEntity;
 }

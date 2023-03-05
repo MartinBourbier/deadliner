@@ -14,6 +14,8 @@ public class CustomModal {
                                             64, true, "Time of the deadline with format 'hh:mm'.");
         TextInput link = CustomTextInput.of("deadline-link", "Deadline link", TextInputStyle.SHORT,
                                             1024, false, "Link to the associated task.");
-        return ModalCreator.of("deadline-modal", "Deadline info", name, date, time, link);
+        TextInput channelId = CustomTextInput.of("deadline-discord-channel", "Discord channel id", TextInputStyle.SHORT,
+                                                 1024, false, "Discord notification channel id.");
+        return ModalCreator.of("deadline-modal", "Deadline info", name, date, time, link, channelId);
     }
 }

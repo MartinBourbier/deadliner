@@ -1,6 +1,6 @@
 package com.deadliner.utils;
 
-public enum DeadlineStatus {
+public enum PublishStatus {
     PUBLIC,
     PRIVATE
 }

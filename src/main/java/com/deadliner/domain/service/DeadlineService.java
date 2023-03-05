@@ -5,7 +5,7 @@ import com.deadliner.converter.DeadlineModelToDeadlineEntityConverter;
 import com.deadliner.data.repository.DeadlineRepository;
 import com.deadliner.domain.entity.DeadlineEntity;
 import com.deadliner.utils.CustomModal;
-import com.deadliner.utils.DeadlineStatus;
+import com.deadliner.utils.PublishStatus;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -45,13 +45,13 @@ public class DeadlineService {
     @Transactional
     public void publish(DeadlineEntity deadlineEntity) {
         var deadline = deadlineRepository.find("label = ?1", deadlineEntity.label).firstResult();
-        deadline.status = DeadlineStatus.PUBLIC;
+        deadline.publishStatus = PublishStatus.PUBLIC;
     }
 
     @Transactional
     public void discard(DeadlineEntity deadlineEntity) {
         var deadline = deadlineRepository.find("label = ?1", deadlineEntity.label).firstResult();
-        deadline.status = DeadlineStatus.PRIVATE;
+        deadline.publishStatus = PublishStatus.PRIVATE;
     }
 
     private boolean isAuthorized(Member member) {

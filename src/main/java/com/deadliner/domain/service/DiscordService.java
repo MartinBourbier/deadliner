@@ -8,6 +8,10 @@ import javax.enterprise.context.ApplicationScoped;
 public class DiscordService {
     private static JDA instance;
 
+    public static JDA getInstance() {
+        return DiscordService.instance;
+    }
+
     public static void setInstance(final JDA instance) {
         DiscordService.instance = instance;
     }
