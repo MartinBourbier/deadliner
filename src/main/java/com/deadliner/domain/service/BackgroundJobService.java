@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
@@ -35,7 +36,10 @@ public class BackgroundJobService {
                 val embedBuilder = new EmbedBuilder();
                 embedBuilder.setTitle(deadlineModel.label);
                 embedBuilder.setColor(Color.RED);
-                embedBuilder.addField("Deadline date/time", deadlineModel.deadlineDateTime.toString(), false);
+                embedBuilder.addField("Deadline date/time",
+                                      deadlineModel.deadlineDateTime.format(DateTimeFormatter.ofPattern(
+                                              "yyyy-MM-dd HH:mm")),
+                                      false);
                 embedBuilder.addField("Deadline link", deadlineModel.link, false);
                 Objects.requireNonNull(recipientChannel)
                        .sendMessage("Deadline is coming!! <@&" + subscriberRole + ">")
