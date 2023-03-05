@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class DeadlineService {
-    @ConfigProperty(name = "discord.deadliner.role") String deadlinerRole;
+    @ConfigProperty(name = "discord.deadliner.roles.manager") String deadlinerRole;
     @ConfigProperty(name = "discord.deadliner.channel") String deadlinerChannel;
 
     @Inject

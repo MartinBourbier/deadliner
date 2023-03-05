@@ -36,7 +36,7 @@ public class ModalListener extends ListenerAdapter {
         val date = Objects.requireNonNull(event.getValue("deadline-date")).getAsString();
         val time = Objects.requireNonNull(event.getValue("deadline-time")).getAsString();
         val channelId = Objects.requireNonNull(event.getValue("deadline-discord-channel")).getAsString();
-        val link = "toto.com";
+        val link = Objects.requireNonNull(event.getValue("deadline-link")).getAsString();
         val embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle(label);
         embedBuilder.setColor(Color.orange);
