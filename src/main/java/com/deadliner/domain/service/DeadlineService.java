@@ -48,6 +48,12 @@ public class DeadlineService {
         deadline.status = DeadlineStatus.PUBLIC;
     }
 
+    @Transactional
+    public void discard(DeadlineEntity deadlineEntity) {
+        var deadline = deadlineRepository.find("label = ?1", deadlineEntity.label).firstResult();
+        deadline.status = DeadlineStatus.PRIVATE;
+    }
+
     private boolean isAuthorized(Member member) {
         return member.getRoles().stream().anyMatch(perm -> perm.getId().equals(deadlinerRole));
     }

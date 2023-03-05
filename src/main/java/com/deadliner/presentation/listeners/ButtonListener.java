@@ -31,7 +31,9 @@ public class ButtonListener extends ListenerAdapter {
             event.reply("Publishing deadline " + label + "...").queue();
             deadlineService.publish(new DeadlineEntity().withLabel(label));
         } else if (Objects.equals(event.getButton().getId(), "deadline-discard")) {
-            event.reply("Discarding deadline...").queue();
+            val label = ButtonListener.getTitle(event);
+            event.reply("Discarding deadline " + label + "...").queue();
+            deadlineService.discard(new DeadlineEntity().withLabel(label));
         }
         Arc.container().requestContext().deactivate();
     }
