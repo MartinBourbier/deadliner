@@ -4,6 +4,7 @@ import com.deadliner.utils.NotifiedStatus;
 import com.deadliner.utils.PublishStatus;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.With;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity @Table(name = "deadline")
-@AllArgsConstructor @NoArgsConstructor @With
+@AllArgsConstructor @NoArgsConstructor @With @ToString
 public class DeadlineModel {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) public Long id;
     public String label;

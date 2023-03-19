@@ -9,6 +9,8 @@ import com.deadliner.utils.PublishStatus;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class DeadlineService {
+    Logger logger = LoggerFactory.getLogger(DeadlineService.class);
     @ConfigProperty(name = "discord.deadliner.roles.manager") String deadlinerRole;
     @ConfigProperty(name = "discord.deadliner.channel") String deadlinerChannel;
 
@@ -40,18 +43,21 @@ public class DeadlineService {
     public void register(DeadlineEntity deadlineEntity) {
         var model = deadlineEntityToDeadlineModelConverter.toModel(deadlineEntity);
         deadlineRepository.persist(model);
+        logger.info("Registered a new deadline: " + model);
     }
 
     @Transactional
     public void publish(DeadlineEntity deadlineEntity) {
         var deadline = deadlineRepository.find("label = ?1", deadlineEntity.label).firstResult();
         deadline.publishStatus = PublishStatus.PUBLIC;
+        logger.info("Publishing deadline: " + deadline);
     }
 
     @Transactional
     public void discard(DeadlineEntity deadlineEntity) {
         var deadline = deadlineRepository.find("label = ?1", deadlineEntity.label).firstResult();
         deadline.publishStatus = PublishStatus.PRIVATE;
+        logger.info("Discarding deadline: " + deadline);
     }
 
     private boolean isAuthorized(Member member) {
@@ -64,5 +70,6 @@ public class DeadlineService {
         if (!event.getChannel().getId().equals(deadlinerChannel))
             event.reply(String.format("You must submit this command in the <#%s> channel!", deadlinerChannel)).queue();
         event.replyModal(CustomModal.getModal()).queue();
+        logger.info("Replying modal to register a new deadline");
     }
 }

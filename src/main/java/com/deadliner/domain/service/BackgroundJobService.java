@@ -23,7 +23,7 @@ public class BackgroundJobService {
 
     @Inject DeadlineRepository deadlineRepository;
 
-    @Scheduled(every = "10s")
+    @Scheduled(every = "5m")
     @Transactional
     public void notifyDeadline() {
         deadlineRepository.findAll().stream().forEach(deadlineModel -> {
